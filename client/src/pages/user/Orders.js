@@ -1,3 +1,4 @@
+import { slugify } from "slugify";
 import React, { useState, useEffect } from "react";
 import UserMenu from "../../components/Layout/UserMenu";
 import axios from "axios";
@@ -7,10 +8,16 @@ import Layout from "../../components/Layout/Layout";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { Link } from "react-router-dom";
+
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
   const [totalQty, setTotalQty] = useState(0);
+
+  const slugifyProductName = (productName) => {
+    return slugify(productName);
+  };
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-IN", {
@@ -94,7 +101,26 @@ const Orders = () => {
                           />
                         </div>
                         <div className="col-md-8">
-                          <p>{p.product?.productName}</p>
+                          <Link
+                            to={`/product/${p.product?.productSlug}`}
+                            style={{
+                              textDecoration: "none",
+                              color: "black",
+                              fontSize: "18px",
+                              fontWeight: "bold",
+                              color: "#333",
+                              textTransform: "capitalize",
+                            }}
+                            onMouseEnter={(e) =>
+                              (e.target.style.color = "#0d6efd")
+                            }
+                            onMouseLeave={(e) =>
+                              (e.target.style.color = "black")
+                            }
+                          >
+                            {p.product?.productName}
+                          </Link>
+
                           <p>{p.product.productDesc.substring(0, 30)}</p>
                           <p>
                             Price : {formatCurrency(p.product?.productPrice)}

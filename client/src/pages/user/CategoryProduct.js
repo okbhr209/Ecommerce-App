@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { useParams, useNavigate } from "react-router-dom";
 import "../../styles/CategoryProductStyles.css";
 import axios from "axios";
 import Layout from "../../components/Layout/Layout";
+
 const CategoryProduct = () => {
   const params = useParams();
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ const CategoryProduct = () => {
   useEffect(() => {
     if (params?.slug) getPrductsByCat();
   }, [params?.slug]);
+
   const getPrductsByCat = async () => {
     try {
       const { data } = await axios.get(

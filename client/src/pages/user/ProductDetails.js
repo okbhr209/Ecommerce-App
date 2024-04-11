@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Layout from '../../components/Layout/Layout'
+import Layout from "../../components/Layout/Layout";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "../../styles/ProductDetailStyles.css";
@@ -14,10 +14,35 @@ const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
 
-  //initalp details
+  const addToCart = async (productId, quantity) => {
+    // Check if the product is already present in the cart
+    const existingProductIndex = cart.findIndex(
+      (item) => item.productId === productId
+    );
+
+    let updatedCart;
+    // If the product is already present, update its quantity
+    if (existingProductIndex !== -1) {
+      updatedCart = [...cart];
+      updatedCart[existingProductIndex].quantity += quantity;
+      setCart(updatedCart);
+    } else {
+      // If the product is not present, add it to the cart
+      updatedCart = [...cart, { productId, quantity }];
+      setCart(updatedCart);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    toast.success("Item Added to cart");
+
+    console.log(cart);
+  };
+
+  //inital details
   useEffect(() => {
     if (params?.slug) getProduct();
   }, [params?.slug]);
+
   //getProduct
   const getProduct = async () => {
     try {
@@ -30,6 +55,7 @@ const ProductDetails = () => {
       console.log(error);
     }
   };
+
   //get similar product
   const getSimilarProduct = async (pid, cid) => {
     try {
@@ -41,6 +67,7 @@ const ProductDetails = () => {
       console.log(error);
     }
   };
+
   return (
     <Layout>
       <div className="row container product-details">
@@ -67,19 +94,13 @@ const ProductDetails = () => {
           </h6>
           <h6>Category : {product?.category?.name}</h6>
           <button
-                  className="btn btn-dark ms-1"
-                  onClick={() => {
-                    setCart([...cart, product]);
-                    localStorage.setItem(
-                      "cart",
-                      JSON.stringify([...cart, product])
-                    );
-                    toast.success("Item Added to cart");
-                  }}
-                >
-                  ADD TO CART
-                </button>
-
+            className="btn btn-dark ms-1"
+            onClick={() => {
+              addToCart(product, 1);
+            }}
+          >
+            ADD TO CART
+          </button>
         </div>
       </div>
       <hr />
@@ -119,18 +140,13 @@ const ProductDetails = () => {
                     More Details
                   </button>
                   <button
-                  className="btn btn-dark ms-1"
-                  onClick={() => {
-                    setCart([...cart, p]);
-                    localStorage.setItem(
-                      "cart",
-                      JSON.stringify([...cart, p])
-                    );
-                    toast.success("Item Added to cart");
-                  }}
-                >
-                  ADD TO CART
-                </button>
+                    className="btn btn-dark ms-1"
+                    onClick={() => {
+                      addToCart(p, 1);
+                    }}
+                  >
+                    ADD TO CART
+                  </button>
                 </div>
               </div>
             </div>

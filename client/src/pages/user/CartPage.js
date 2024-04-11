@@ -9,6 +9,8 @@ import "../../styles/CartStyles.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "../../components/Spinner";
+import { Link } from "react-router-dom";
+import { slugify } from "slugify";
 
 const CartPage = () => {
   const [auth, setAuth] = useAuth();
@@ -41,11 +43,12 @@ const CartPage = () => {
       console.log(error);
     }
   };
+
   //detele item
   const removeCartItem = (pid) => {
     try {
       let myCart = [...cart];
-      let index = myCart.findIndex((item) => item._id === pid);
+      let index = myCart.findIndex((item) => item.productId._id === pid);
       myCart.splice(index, 1);
       setCart(myCart);
       localStorage.setItem("cart", JSON.stringify(myCart));
@@ -124,16 +127,22 @@ const CartPage = () => {
                   />
 
                   <div className="col-md-4">
-                    <p
+                    <Link
+                      to={`/product/${p.productId?.slug}`}
                       style={{
+                        textDecoration: "none",
+                        color: "black",
                         fontSize: "18px",
                         fontWeight: "bold",
                         color: "#333",
                         textTransform: "capitalize",
                       }}
+                      onMouseEnter={(e) => (e.target.style.color = "#0d6efd")}
+                      onMouseLeave={(e) => (e.target.style.color = "black")}
                     >
                       {p.productId?.name}
-                    </p>
+                    </Link>
+
                     <p>Price : {formatCurrency(p.productId?.price)}</p>
                     <p>Quantity : {p?.quantity}</p>
                     <p>
@@ -148,7 +157,6 @@ const CartPage = () => {
                         Remove
                       </button>
                     </div>
-                    <div></div>
                   </div>
                 </div>
               ))}
