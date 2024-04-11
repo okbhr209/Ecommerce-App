@@ -5,19 +5,22 @@ const orderSchema = new mongoose.Schema(
     products: [
       {
         product: {
-          productId : {
-            type:mongoose.ObjectId,
-            ref: "Products"
-          } ,
-          productName : {
-            type: String
-          } ,
-          productDesc:{
-            type: String
-          } ,
-          productPrice : {
-            type:Number
-          } ,
+          productId: {
+            type: mongoose.ObjectId,
+            ref: "Products",
+          },
+          productName: {
+            type: String,
+          },
+          productSlug: {
+            type: String,
+          },
+          productDesc: {
+            type: String,
+          },
+          productPrice: {
+            type: Number,
+          },
 
           // type: mongoose.ObjectId,
           // ref: "Products",
@@ -42,7 +45,6 @@ const orderSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
 
 // const orderSchema = new mongoose.Schema(
 //   {
