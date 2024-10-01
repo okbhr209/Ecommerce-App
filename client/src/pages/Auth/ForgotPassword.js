@@ -3,9 +3,10 @@ import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
-import toast from "react-hot-toast"
-import "react-toastify/dist/ReactToastify.css";
+// import toast from "react-hot-toast";
+// import "react-toastify/dist/ReactToastify.css";
 import "../../styles/AuthStyles.css"; //../../styles/AuthStyles.css
 
 const ForgotPasssword = () => {
@@ -19,12 +20,14 @@ const ForgotPasssword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API}/api/v1/auth/forgot-password`, {
-        email,
-        answer,
-        newPassword
- 
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/auth/forgot-password`,
+        {
+          email,
+          answer,
+          newPassword,
+        }
+      );
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
 
@@ -33,8 +36,9 @@ const ForgotPasssword = () => {
         toast.error(res.data.message);
       }
     } catch (error) {
+      console.log("first");
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error("Invalid Email or Answer");
     }
   };
   return (

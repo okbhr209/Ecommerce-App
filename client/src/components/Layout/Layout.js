@@ -6,8 +6,8 @@ import { Helmet } from "react-helmet";
 // import { ToastContainer } from "react-toastify";
 // import  "react-toastify/dist/ReactToastify.css" ;
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import ToastContainer
 
 const Layout = ({ children, title, description, keywords, author }) => {
@@ -23,7 +23,7 @@ const Layout = ({ children, title, description, keywords, author }) => {
       <Header />
       <main style={{ minHeight: "70vh" }}>
         {/* <Toaster /> */}
-        <ToastContainer/>
+        <ToastContainer />
         {children}
       </main>
       <Footer />
@@ -32,10 +32,10 @@ const Layout = ({ children, title, description, keywords, author }) => {
 };
 
 Layout.defaultProps = {
-  title: "Ecommerce app - shop now",
-  description: "mern stack project",
-  keywords: "mern,react,node,mongodb",
-  author: "Techinfoyt",
+  title: "Velora Mart - shop now",
+  description: "An Ecommerce Website",
+  keywords: "",
+  author: "okbhr209",
 };
 
 export default Layout;

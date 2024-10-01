@@ -1,0 +1,14 @@
+/* Global Styles */
+body {
+    background-color: #F5F5F5;  /* Light grey background */
+    color: #212121;  /* Dark charcoal text */
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .container-fluid {
+    background-color: #FFFFFF;  /* White background for content sections */
+  }
+  

@@ -200,6 +200,8 @@ export const productFiltersController = async (req, res) => {
       success: true,
       products,
     });
+    console.log("Products");
+    console.log(products);
   } catch (error) {
     console.log(error);
     res.status(400).send({

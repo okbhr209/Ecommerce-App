@@ -115,24 +115,29 @@ const ProductDetails = () => {
               <img
                 src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                 className="card-img-top"
-                height={"250px"}
-                width={"50px"}
                 alt={p.name}
               />
-              <div className="card-body">
-                <div className="card-name-price">
-                  <h5 className="card-title">{p.name}</h5>
-                  <h5 className="card-title card-price">
-                    {p.price.toLocaleString("en-IN", {
-                      style: "currency",
-                      currency: "INR",
-                    })}
-                  </h5>
+              <div className="card-body d-flex flex-column justify-content-between">
+                <div>
+                  <div
+                    className="card-name-price"
+                    style={{ alignItems: "baseline" }}
+                  >
+                    <h5 className="card-title">{p.name}</h5>
+                    <h5 className="card-title card-price">
+                      {p.price.toLocaleString("en-IN", {
+                        style: "currency",
+                        currency: "INR",
+                      })}
+                    </h5>
+                  </div>
+                  <p className="card-text">
+                    {p.description.substring(0, 60)}...
+                  </p>
                 </div>
-                <p className="card-text ">
-                  {p.description.substring(0, 60)}...
-                </p>
-                <div className="card-name-price">
+                <div className="card-name-price mt-auto">
+                  {" "}
+                  {/* Align items at the bottom */}
                   <button
                     className="btn btn-info ms-1"
                     onClick={() => navigate(`/product/${p.slug}`)}
@@ -156,5 +161,7 @@ const ProductDetails = () => {
     </Layout>
   );
 };
+{
+}
 
 export default ProductDetails;

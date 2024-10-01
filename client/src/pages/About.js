@@ -11,12 +11,18 @@ const About = () => {
         </div>
         <div className="col-md-4">
           <p className="text-justify mt-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-            officiis obcaecati esse tempore unde ratione, eveniet mollitia,
-            perferendis eius temporibus dicta blanditiis doloremque explicabo
-            quasi sunt vero optio cum aperiam vel consectetur! Laborum enim
-            accusantium atque, excepturi sapiente amet! Tenetur ducimus aut
-            commodi illum quidem neque tempora nam.
+            Welcome to Velora Mart, your . We’re dedicated to giving you the
+            very best of available products , with a focus on dependability,
+            customer service, and uniqueness.
+          </p>
+          <p>
+            We now serve customers all over the world, and are thrilled that
+            we’re able to turn our passion into our own website.
+          </p>
+          <p>
+            We hope you enjoy our products as much as we enjoy offering them to
+            you. If you have any questions or comments, please don’t hesitate to
+            contact us.
           </p>
         </div>
       </div>

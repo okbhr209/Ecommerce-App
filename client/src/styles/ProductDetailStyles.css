@@ -42,7 +42,7 @@
   }
   
   .similar-products .card img:hover {
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
   
   .similar-products .card-img-top {

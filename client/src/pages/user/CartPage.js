@@ -20,6 +20,7 @@ const CartPage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [ok, setOk] = useState(false);
+  const [qty, setQty] = useState(0);
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-IN", {
@@ -28,12 +29,29 @@ const CartPage = () => {
     }).format(amount);
   };
 
+  // Add this function to handle quantity changes
+  const handleQuantityChange = (productId, newQuantity) => {
+    try {
+      let myCart = [...cart];
+      let index = myCart.findIndex((item) => item.productId._id === productId);
+      if (index !== -1) {
+        myCart[index].quantity = newQuantity;
+        setCart(myCart);
+        localStorage.setItem("cart", JSON.stringify(myCart));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //total price
   const totalPrice = () => {
     try {
       let total = 0;
       cart?.map((item) => {
-        total = total + item.productId.price * item.quantity;
+        // total = total + item.productId.price * item.quantity;
+        const quantity = isNaN(item.quantity) ? 0 : item.quantity;
+        total = total + item.productId.price * quantity;
       });
       return total.toLocaleString("en-IN", {
         style: "currency",
@@ -44,7 +62,7 @@ const CartPage = () => {
     }
   };
 
-  //detele item
+  //delete item
   const removeCartItem = (pid) => {
     try {
       let myCart = [...cart];
@@ -56,21 +74,6 @@ const CartPage = () => {
       console.log(error);
     }
   };
-
-  //get payment gateway token
-  const getToken = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/braintree/token`
-      );
-      setClientToken(data?.clientToken);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getToken();
-  }, [auth?.token]);
 
   //handle payments
   const handlePayment = async () => {
@@ -111,6 +114,7 @@ const CartPage = () => {
             </h1>
           </div>
         </div>
+
         <div className="container ">
           <div className="row ">
             <div className="col-md-7  p-0 m-0">
@@ -144,11 +148,40 @@ const CartPage = () => {
                     </Link>
 
                     <p>Price : {formatCurrency(p.productId?.price)}</p>
-                    <p>Quantity : {p?.quantity}</p>
+                    <p>Quantity : {isNaN(p.quantity) ? 0 : p.quantity}</p>
+
+                    {/* Quantity input field */}
+                    <div className="input-group mb-3">
+                      <button
+                        className="btn btn-outline-secondary"
+                        type="button"
+                        onClick={() =>
+                          handleQuantityChange(p.productId?._id, p.quantity - 1)
+                        }
+                        disabled={p.quantity === 1}
+                      >
+                        -
+                      </button>
+
+                      <button
+                        className="btn btn-outline-secondary"
+                        type="button"
+                        onClick={() =>
+                          handleQuantityChange(p.productId?._id, p.quantity + 1)
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+
                     <p>
                       Subtotal :{" "}
-                      {formatCurrency(p.quantity * p.productId?.price)}{" "}
+                      {formatCurrency(
+                        (isNaN(p.quantity) ? 0 : p.quantity) *
+                          p.productId?.price
+                      )}{" "}
                     </p>
+
                     <div className="col-md-4 cart-remove-btn">
                       <button
                         className="btn btn-danger"

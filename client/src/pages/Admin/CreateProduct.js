@@ -24,7 +24,9 @@ const CreateProduct = () => {
   //get all category
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/category/get-category`);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/category/get-category`
+      );
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -206,13 +208,6 @@ export default CreateProduct;
 // }
 
 // export default CreateProduct ;
-
-
-
-
-
-
-
 
 // // import React, { useState, useEffect } from "react";
 // // import Layout from "./../../components/Layout/Layout";

@@ -1,3 +1,39 @@
+/* style.css
+/* Inside your CSS file */
+body {
+  font-family: "Amazon Ember", Arial, sans-serif;
+}
+
+ 
+
+/* Remove dropdown arrows from number input */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Style quantity input buttons */
+/* .input-group-btn button {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+} */
+/* Inside your CSS file or style tag */
+.input-group input[type="number"] {
+  flex: initial !important; /* Remove the flex property */
+}
+
+
+
+
+
+
+
 .cart-page {
     margin-top: 64px;
   }

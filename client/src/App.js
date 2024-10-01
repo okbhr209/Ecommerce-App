@@ -1,7 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Layout from "./components/Layout/Layout";
-
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
@@ -44,6 +43,9 @@ const App = () => {
           <Route path="user" element={<Dashboard />} />
           <Route path="user/orders" element={<Orders />} />
           <Route path="user/profile" element={<Profile />} />
+
+          {/* Fallback for invalid admin routes */}
+          {/* <Route path="*" element={<PageNotFound />} /> */}
         </Route>
 
         <Route path="/dashboard" element={<AdminRoute />}>
@@ -56,6 +58,9 @@ const App = () => {
           <Route path="admin/products" element={<Products />} />
           {/* <Route path="admin/users" element={<Users />} /> */}
           <Route path="admin/orders" element={<AdminOrders />} />
+
+          {/* Fallback for invalid admin routes */}
+          {/* <Route path="*" element={<PageNotFound />} /> */}
         </Route>
 
         <Route path="/about" element={<About />} />

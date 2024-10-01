@@ -7,6 +7,12 @@
     font-family: "Playfair Display", serif;
   }
   
+  .home-page h4 {
+    color: rgb(55, 52, 52);
+    font-family: "Playfair Display", serif;
+  }
+  
+
   .home-page {
     display: flex;
     flex-wrap: wrap;

@@ -9,6 +9,8 @@ import "antd/dist/reset.css";
 import { SearchProvider } from "./components/context/search";
 import { CartProvider } from "./components/context/cart";
 
+// import backgroundImage from '../src/images/OIG1';
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <SearchProvider>
